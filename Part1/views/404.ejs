@@ -1,0 +1,16 @@
+<%- include("partials/head", { title, bodyClass: "error-page" }) %>
+<%- include("partials/header", { pageContext: "Off the list" }) %>
+
+<main id="main-content" class="error-main">
+  <section class="error-panel" aria-labelledby="error-title">
+    <p class="error-code" aria-hidden="true">404</p>
+    <div class="error-copy">
+      <p class="eyebrow">Dead end</p>
+      <h1 id="error-title"><%= title %></h1>
+      <p><%= message %> The ranking is still right where you left it.</p>
+      <a class="primary-link" href="/">Return to the rankings <span aria-hidden="true">→</span></a>
+    </div>
+  </section>
+</main>
+
+<%- include("partials/footer") %>

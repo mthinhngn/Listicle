@@ -1,0 +1,60 @@
+<%- include("partials/head", { title, bodyClass: "home-page" }) %>
+<%- include("partials/header", { pageContext: "2026 field notes" }) %>
+
+<main id="main-content">
+  <section class="hero" aria-labelledby="page-title">
+    <p class="eyebrow">Independent product analysis · Issue 01</p>
+    <h1 id="page-title">The SaaS Growth<br><em>Leaderboard</em></h1>
+    <div class="hero-deck">
+      <p>Eight products that turned a useful idea into lasting distribution.</p>
+      <p class="edition-note">Ranked by the strength of the growth loop, not company size.</p>
+    </div>
+  </section>
+
+  <section class="ranking" aria-labelledby="ranking-title">
+    <div class="ranking-header">
+      <h2 id="ranking-title">The ranking</h2>
+      <p><%= products.length %> field notes</p>
+    </div>
+
+    <ol class="leaderboard">
+      <% products.forEach((product) => { %>
+        <li class="leaderboard-item">
+          <article class="product-row">
+            <p class="rank" aria-label="Rank <%= product.rank %>"><%= String(product.rank).padStart(2, "0") %></p>
+            <div class="product-mark product-mark--<%= product.slug %>" aria-hidden="true">
+              <object
+                class="product-logo product-logo--<%= product.slug %>"
+                data="/logos/<%= product.slug %>.svg"
+                type="image/svg+xml"
+                tabindex="-1"
+              >
+                <span class="logo-fallback"><%= product.name.charAt(0) %></span>
+              </object>
+            </div>
+            <div class="product-copy">
+              <p class="product-category"><%= product.category %></p>
+              <h3><a href="/products/<%= product.slug %>"><%= product.name %></a></h3>
+              <p class="product-blurb"><%= product.blurb %></p>
+            </div>
+            <dl class="product-meta">
+              <div>
+                <dt>Category</dt>
+                <dd><%= product.category %></dd>
+              </div>
+              <div>
+                <dt>Pricing</dt>
+                <dd><%= product.pricing %></dd>
+              </div>
+            </dl>
+            <a class="row-link" href="/products/<%= product.slug %>">
+              View teardown <span aria-hidden="true">↗</span>
+            </a>
+          </article>
+        </li>
+      <% }) %>
+    </ol>
+  </section>
+</main>
+
+<%- include("partials/footer") %>

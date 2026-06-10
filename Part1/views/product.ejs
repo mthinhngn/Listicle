@@ -1,0 +1,78 @@
+<%- include("partials/head", { title, bodyClass: "detail-page" }) %>
+<%- include("partials/header", { pageContext: `Rank ${String(product.rank).padStart(2, "0")} · ${product.category}` }) %>
+
+<main id="main-content">
+  <nav class="back-nav" aria-label="Breadcrumb">
+    <a href="/"><span aria-hidden="true">←</span> Back to rankings</a>
+  </nav>
+
+  <article class="teardown">
+    <header class="teardown-hero">
+      <div class="detail-rank">
+        <span>Rank</span>
+        <strong><%= String(product.rank).padStart(2, "0") %></strong>
+      </div>
+      <div class="detail-mark product-mark--<%= product.slug %>" aria-hidden="true">
+        <object
+          class="product-logo product-logo--<%= product.slug %>"
+          data="/logos/<%= product.slug %>.svg"
+          type="image/svg+xml"
+          tabindex="-1"
+        >
+          <span class="logo-fallback"><%= product.name.charAt(0) %></span>
+        </object>
+      </div>
+      <div class="detail-heading">
+        <p class="eyebrow">Growth teardown · <%= product.founded %></p>
+        <h1><%= product.name %></h1>
+        <p class="detail-deck"><%= product.blurb %></p>
+      </div>
+    </header>
+
+    <div class="teardown-grid">
+      <aside class="facts" aria-labelledby="facts-title">
+        <h2 id="facts-title">At a glance</h2>
+        <dl>
+          <div>
+            <dt>Category</dt>
+            <dd><%= product.category %></dd>
+          </div>
+          <div>
+            <dt>Pricing</dt>
+            <dd><%= product.pricing %></dd>
+          </div>
+          <div>
+            <dt>Founded</dt>
+            <dd><%= product.founded %></dd>
+          </div>
+        </dl>
+        <a class="primary-link" href="<%= product.websiteUrl %>" target="_blank" rel="noreferrer">
+          Visit <%= product.name %> <span aria-hidden="true">↗</span>
+        </a>
+      </aside>
+
+      <div class="story">
+        <section aria-labelledby="summary-title">
+          <p class="section-number">01 / The read</p>
+          <h2 id="summary-title">Growth summary</h2>
+          <p class="summary-copy"><%= product.growthSummary %></p>
+        </section>
+
+        <section aria-labelledby="tactics-title">
+          <p class="section-number">02 / The playbook</p>
+          <h2 id="tactics-title">Growth tactics</h2>
+          <ol class="tactics">
+            <% product.growthTactics.forEach((tactic, index) => { %>
+              <li>
+                <span aria-hidden="true"><%= String(index + 1).padStart(2, "0") %></span>
+                <p><%= tactic %></p>
+              </li>
+            <% }) %>
+          </ol>
+        </section>
+      </div>
+    </div>
+  </article>
+</main>
+
+<%- include("partials/footer") %>
